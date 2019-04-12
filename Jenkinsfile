@@ -16,7 +16,7 @@ node {
 		}
 	
 		stage('Run') {
-					pipelineContext.dockerContainer = pipelineContext.dockerImage.run()
+					pipelineContext.dockerContainer = pipelineContext.dockerImage.run('-p 80:80')
 					sh 'docker ps'
 	        sh 'curl localhost'
 
