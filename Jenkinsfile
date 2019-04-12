@@ -13,8 +13,6 @@ node {
 
 		stage('Run & Test') {
 			docker.image("$Image").withRun('-p 80:80') { c ->
-        sh 'docker ps'
-        sh 'curl localhost'
     	}
 		}
 
