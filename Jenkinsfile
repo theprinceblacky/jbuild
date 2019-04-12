@@ -19,8 +19,9 @@ node {
 		}
 
 		stage('Push') {
-
- 		   docker.withRegistry('https://registry.gitlab.com', 'reg1').push('$Image')
+			docker.withRegistry('https://registry.gitlab.com', 'credentials-id') {
+	    def customImage = docker.build("$imageName:${env.BUILD_ID}")
+	    customImage.push()
 		}
 }
 
