@@ -19,7 +19,12 @@ node {
 					pipelineContext.dockerContainer = pipelineContext.dockerImage.run('-p 80:80')
 					sh 'docker ps'
 	        sh 'curl localhost'
+		}
 
+		stage('Push') {
+					docker.withRegistry('https://registry.gitlab.com', 'reg1') {
+					pipelineContext.dockerImage.push()
+					}
 		}
 
 }
