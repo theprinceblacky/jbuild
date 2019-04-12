@@ -16,10 +16,11 @@ node {
 		}
 	
 		stage('Run') {
-					pipelineContext.dockerContainer = pipelineContext.dockerImage.run('--name run-${env.BUILD_ID}	-p 80:80')
+					sh 'docker rm -f run-$BUILD_ID'
+					pipelineContext.dockerContainer = pipelineContext.dockerImage.run('--name run-$BUILD_ID	-p 80:80')
 					sh 'docker ps'
 	        sh 'curl localhost'
-					sh 'docker rm -f  '
+					sh 'docker rm -f run-$BUILD_ID'
 		}
 
 		stage('Push') {
