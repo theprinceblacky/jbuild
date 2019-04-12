@@ -16,7 +16,7 @@ node {
 		}
 	
 		stage('Run') {
-					sh 'docker rm -f run-$BUILD_ID'
+					sh 'if[ $(docker ps -a | grep run-$BUILD_ID | wc -l) == "1" ];then docker rm -f run-$BUILD_ID;fi'
 					pipelineContext.dockerContainer = pipelineContext.dockerImage.run('--name run-$BUILD_ID	-p 80:80')
 					sh 'docker ps'
 	        sh 'curl localhost'
