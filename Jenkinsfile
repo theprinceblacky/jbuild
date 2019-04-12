@@ -5,7 +5,7 @@ node {
 
     docker.withRegistry('https://registry.gitlab.com', 'reg1') {
 
-    def customImage = docker.build("$imageName:${env.BUILD_ID}")
+    def customImage = docker.build("$imageName:version-${env.BUILD_ID}")
 
     customImage.push()
     }
