@@ -3,7 +3,7 @@ node {
 
     environment {
     	registryProjet='registry.gitlab.com/xavki/presentations-jenkins'
-			IMAGE='${registryProjet}:version-${env.BUILD_ID}'
+			IMAGE="${registryProjet}:version-${env.BUILD_ID}"
 		}
 
     stage('Clone') {
