@@ -1,17 +1,17 @@
 def pipelineContext = [:]
 node {
 
-    environment {
-    	registryProjet='registry.gitlab.com/xavki/presentations-jenkins'
-			IMAGE="${registryProjet}:version-${env.BUILD_ID}"
-		}
+   def registryProjet='registry.gitlab.com/xavki/presentations-jenkins'
+	 def IMAGE="${registryProjet}:version-${env.BUILD_ID}"
+
+	 echo "IMAGE = $IMAGE"
 
     stage('Clone') {
     			checkout scm
 		}
 
 		def img = stage('Build') {
-					docker.build("${env.IMAGE}",  '.')
+					docker.build("$IMAGE",  '.')
 		}
 	
 		stage('Run') {
