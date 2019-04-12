@@ -18,11 +18,5 @@ node {
     	}
 		}
 
-		stage('Push') {
-			docker.withRegistry('https://registry.gitlab.com', 'reg1') {
-	    def customPush = docker.build("$Image")
-	    customPush.push()
-			}
-		}
 }
 
