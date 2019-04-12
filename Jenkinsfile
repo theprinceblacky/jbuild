@@ -11,7 +11,7 @@ node {
 		}
 
 		stage('Run & Test') {
-			docker.image($customImage).withRun('-p 80:80') { c ->
+			docker.image(customImage).withRun('-p 80:80') { c ->
         sh 'docker ps'
         sh 'curl localhost'
     	}
