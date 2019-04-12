@@ -23,6 +23,7 @@ node {
 		}
 
 		stage('Push') {
+					echo pipelineContext.dockerImage
 					docker.withRegistry('https://registry.gitlab.com', 'reg1') {
 					pipelineContext.dockerImage.push("${env.IMAGE}")
 					}
