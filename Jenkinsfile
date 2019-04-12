@@ -21,7 +21,7 @@ node {
 		stage('Push') {
 
  		   docker.withRegistry('https://registry.gitlab.com', 'reg1') {
-  		 customImage.push()
+  		 Image.push()
    		 }
 		}
 }
