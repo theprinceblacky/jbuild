@@ -1,3 +1,4 @@
+def pipelineContext = [:]
 node {
 
     environment {
