@@ -10,23 +10,22 @@ node {
     			checkout scm
 		}
 
-		stage('Build') {
-					dockerImage = docker.build("${env.IMAGE}",  '.')
-          pipelineContext.dockerImage = dockerImage
+		def img = stage('Build') {
+					docker.build("${env.IMAGE}",  '.')
 		}
 	
 		stage('Run') {
-					pipelineContext.dockerContainer = pipelineContext.dockerImage.run('--name run-$BUILD_ID	-p 80:80')
-					sh 'docker ps'
-	        sh 'curl localhost'
-					sh 'docker rm -f run-$BUILD_ID'
+					img.withRun("--name run-$BUILD_ID -p 80:80") { c ->
+						sh 'curl localhost'
+          }					
 		}
 
 		stage('Push') {
 					docker.withRegistry('https://registry.gitlab.com', 'reg1') {
-					pipelineContext.dockerImage.push('latest')
+							img.push 'latest'
+              img.push()
 					}
 		}
-
+ 
 }
 
