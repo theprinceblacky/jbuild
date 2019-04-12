@@ -1,7 +1,7 @@
 node {
 
     def imageName='registry.gitlab.com/xavki/presentations-jenkins'
-		def customImage=$imageName:version-${env.BUILD_ID}
+		def customImage='${imageName}:version-${env.BUILD_ID}'
 
     stage('Clone') {
     	checkout scm
