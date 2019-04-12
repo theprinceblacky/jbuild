@@ -16,7 +16,6 @@ node {
 		}
 	
 		stage('Run') {
-					sh 'docker rm -f $(docker ps -aq)'
 					pipelineContext.dockerContainer = pipelineContext.dockerImage.run('--name run-$BUILD_ID	-p 80:80')
 					sh 'docker ps'
 	        sh 'curl localhost'
